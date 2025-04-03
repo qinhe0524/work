@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FreeWorker">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select * from free_worker where 1=1
+		<if test="params.worker_no!=null and params.worker_no!=''">
+			and worker_no = '${params.worker_no}'
+		</if>
+		<if test="params.worker_status!=null and params.worker_status!=''">
+			and worker_status = ${params.worker_status}
+		</if>
+		<if test="params.worker_name!=null and params.worker_name!=''">
+			and worker_name = '${params.worker_name}'
+		</if>
+		<if test="params.workder_cardno!=null and params.workder_cardno!=''">
+			and workder_cardno = '${params.workder_cardno}'
+		</if>
+		<if test="params.worker_province!=null and params.worker_province!=''">
+			and worker_province = '${params.worker_province}'
+		</if>
+		<if test="params.worker_mobile!=null and params.worker_mobile!=''">
+			and worker_mobile = '${params.worker_mobile}'
+		</if>
+		<if test="params.min_date!=null and params.min_date!='' and params.max_date==''">
+			and worker_regedit_date= '${params.min_date}'
+		</if>
+		<if test="params.max_date!=null and params.max_date!='' and params.min_date==''">
+			and worker_regedit_date='${params.max_date}'
+		</if>
+		<if test="params.min_date!=null and params.min_date!='' and  params.max_date!=null and params.max_date!=''">
+			and worker_regedit_date between '${params.min_date}' and
+			'${params.max_date}'
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.FreeWorker" parameterType="String">
+		select * from free_worker where worker_no=#{_parameter}
+	</select>
+	
+	<select id="getOneByCardNo" resultType="com.xk.entity.FreeWorker" parameterType="String">
+		select * from free_worker where worker_cardno=#{_parameter}
+	</select>
+	<select id="getOneByMobile" resultType="com.xk.entity.FreeWorker" parameterType="String">
+		select * from free_worker where worker_mobile=#{_parameter} limit 1
+	</select>
+	<select id="getByOpenId" resultType="com.xk.entity.FreeWorker" parameterType="String">
+		select * from free_worker where wechat_open_id=#{_parameter} limit 1
+	</select>
+	
+	<insert id="insert">
+	     <selectKey resultType="String" keyProperty="worker_no" order="AFTER">
+             SELECT worker_no from free_worker order by worker_no desc limit 1
+         </selectKey>
+		insert into free_worker(worker_no,worker_cardno,worker_bank_person,worker_name,worker_bank_name,worker_bank_num,worker_regedit_time,worker_regedit_date,worker_mobile,worker_province,worker_city,worker_carddate,idcard_up)
+		 values('',#{worker_cardno},#{worker_bank_person},#{worker_name},#{worker_bank_name},#{worker_bank_num},TIME(now()),DATE(now()),#{worker_mobile},#{worker_province},#{worker_city},#{worker_carddate},1)
+	</insert>
+	<update id="update"  parameterType="int">
+		update free_worker set workder_cardno=#{workder_cardno},worker_bank_person=#{worker_bank_person},woker_status=#{woker_status},woker_name=#{woker_name},worker_bank_name=#{worker_bank_name},worker_bank_num=#{worker_bank_num},worker_add_time=#{worker_add_time},worker_mobile=#{worker_mobile},worker_province=#{worker_province} where Id=#{id}
+	</update>
+
+	<update id="AirOpentWechat_open_id"  parameterType="String">
+		update free_worker set wechat_open_id=null where worker_no=#{_params}
+	</update>
+	
+	<update id="updateWechatInfo"  parameterType="map">
+		update free_worker set wechat_open_id=#{wechat_open_id},wechat_head_img=#{wechat_head_img},wechat_nickname=#{wechat_nickname} where worker_no=#{worker_no}
+	</update>
+	<update id="updateStatus" parameterType="map">
+		update free_worker set worker_status=#{worker_status} where worker_no='${worker_no}'
+	</update>
+	<select id="getMobileCount" parameterType="String" resultType="int">
+		select count(*) as num from free_worker where worker_mobile=#{_parameter}
+	</select>
+	<update id="updateCardDate" parameterType="Map">
+		update free_worker set worker_carddate=#{worker_carddate} where worker_no='${worker_no}'
+	</update>
+</mapper> 
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TaskOrderBatch">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select tob.*,c.client_name,t.task_name,t.task_type from task_order_batch tob left join clients c on tob.client_no=c.client_no left join task t on tob.task_no=t.task_no where 1=1
+		<if test="params.client_name!=null and params.client_name!=''">
+			and c.client_name like '%${params.client_name}%'
+		</if>
+		<if test="params.order_batch_no!=null and params.order_batch_no!=''">
+			and tob.order_batch_no='${params.order_batch_no}'
+		</if>
+		<if test="params.task_no!=null and params.task_no!=''">
+			and tob.add_date='${params.add_date}'
+		</if>
+		<if test="params.add_date!=null and params.add_date!=''">
+			and tob.add_date='${params.add_date}'
+		</if>
+		<if test="params.order_batch_status!=null and params.order_batch_status!=''">
+			and order_batch_status.add_date=#{params.order_batch_status}
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.TaskOrderBatch" parameterType="Map">
+		select * from task_order_batch where order_batch_no=#{order_batch_no} and client_no=#{client_no}
+	</select>
+	<select id="getTaskOrderBatchNo" parameterType="String" resultType="String">
+		select concat('RP',(replace(IFNULL(max(order_batch_no),concat(date_format(now(),'%y%m%d'),replace(#{_parameter},'C',''),'000')),'RP','')+1)) from task_order_batch where DATE(add_date)=date_format(now(),'%Y-%m-%d') and client_no=#{_parameter}
+	</select>
+	<insert id="insert">
+		insert into task_order_batch(order_batch_status,add_date,client_no,task_no,order_num,sizeup_service_amt,order_batch_no,add_time,batch_amt)
+		 values(#{order_batch_status},DATE(now()),#{client_no},#{task_no},#{order_num},#{sizeup_service_amt},#{order_batch_no},TIME(now()),#{batch_amt})
+	</insert>
+	<update id="topay"  parameterType="Map">
+		update task_order_batch set order_batch_status=3 where order_batch_no=#{order_batch_no} and client_no=#{client_no} and order_batch_status=2
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from task_order_batch where Id=#{id}
+	</delete>
+</mapper> 
+

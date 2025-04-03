@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TaskOrder">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select tod.*,c.client_name,t.task_name from task_order tod left join clients c on tod.client_no=c.client_no left join task t on tod.task_no=t.task_no where 1=1
+		<if test="params.task_no!=null and params.task_no!=''">
+			and tod.task_no = '${params.task_no}'
+		</if>
+		<if test="params.task_order_no!=null and params.task_order_no!=''">
+			and tod.task_order_no = '${params.task_order_no}'
+		</if>
+		<if test="params.order_batch_no!=null and params.order_batch_no!=''">
+			and tod.order_batch_no = '${params.order_batch_no}'
+		</if>
+		<if test="params.client_no!=null and params.client_no!=''">
+			and tod.client_no = '${params.client_no}'
+		</if>
+		<if test="params.add_date!=null and params.client_no!=''">
+			and tod.add_date = '${params.add_date}'
+		</if>
+		<if test="params.task_order_status!=null and params.task_order_status!=''">
+			and tod.task_order_status = #{params.task_order_status}
+		</if>
+		<if test="params.worker_bank_person!=null and params.worker_bank_person!=''">
+			and tod.worker_bank_person= '${params.worker_bank_person}'
+		</if>
+		<if test="params.worker_cardno!=null and params.worker_cardno!=''">
+			and tod.worker_cardno= '${params.worker_cardno}'
+		</if>
+		<if test="params.worker_bank_num!=null and params.worker_bank_num!=''">
+			and tod.worker_bank_num= '${params.worker_bank_num}'
+		</if>
+		<if test="params.client_order_no!=null and params.client_order_no!=''">
+			and tod.client_order_no= '${params.client_order_no}'
+		</if>
+		<if test="params.pay_channel!=null and params.pay_channel!=''">
+			and tod.client_order_no= #{params.pay_channel}
+		</if>
+		<if test="params.pay_order_no!=null and params.pay_order_no!=''">
+			and tod.pay_order_no= #{params.pay_order_no}
+		</if>
+	</select>
+	
+	<select id="getWorkerOrder" resultType="map" parameterType="String">
+	select tod.*,t.task_name,c.client_name from task_order tod left join task t on tod.task_no=t.task_no left join clients c on tod.client_no=c.client_no where tod.task_order_status=4 and worker_no=#{_parameter} order by tod.Id desc
+	</select>
+	
+	<select id="getWorkerOrderCount" resultType="String" parameterType="String">
+	select sum(order_amt) as order_amt from task_order  where task_order_status=4 and worker_no=#{_parameter}
+	</select>
+	<select id="getWorkerTask" resultType="map" parameterType="String">
+	select tod.*,t.task_name,t.task_no,t.start_date,t.end_date,t.task_rim,t.task_province,t.task_city,c.client_name from task_order tod left join task t on tod.task_no=t.task_no left join clients c on tod.client_no=c.client_no where worker_no=#{_parameter} order by tod.Id desc
+	</select>
+	<select id="getOne" resultType="com.xk.entity.TaskOrder" parameterType="int">
+		select * from task_order where Id=#{id}
+	</select>
+	<select id="getByTaskWorker" resultType="com.xk.entity.TaskOrder" parameterType="map">
+		select * from task_order where task_no=#{task_no} and worker_no=#{worker_no} limit 1
+	</select>
+	<insert id="insert">
+		insert into task_order(task_order_no,worker_bank_person,add_date,worker_bank_name,worker_bank_num,order_amt,service_amt,task_no,worker_no,worker_cardno,task_order_status,pay_channel,order_batch_no,add_time,client_order_no,client_no,task_order_rim)
+		 values(#{task_order_no},#{worker_bank_person},DATE(now()),#{worker_bank_name},#{worker_bank_num},#{order_amt},#{service_amt},#{task_no},#{worker_no},#{worker_cardno},#{task_order_status},#{pay_channel},#{order_batch_no},TIME(now()),#{client_order_no},#{client_no},#{task_order_rim})
+	</insert>
+	<update id="update"  parameterType="int">
+		update task_order set task_order_no=#{task_order_no},worker_bank_person=#{worker_bank_person},add_date=#{add_date},worker_bank_name=#{worker_bank_name},worker_bank_num=#{worker_bank_num},order_amt=#{order_amt},service_amt=#{service_amt},task_no=#{task_no},worker_no=#{worker_no},worker_cardno=#{worker_cardno},task_order_status=#{task_order_status},pay_channel=#{pay_channel},order_batch_no=#{order_batch_no},add_time=#{add_time},pay_order_no=#{pay_order_no} where Id=#{id}
+	</update>
+	<update id="topay" parameterType="Map">
+		update task_order set task_order_status=3 where order_batch_no=#{order_batch_no} and client_no=#{client_no} and task_order_status=2
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from task_order where Id=#{id}
+	</delete>
+	<select id="getTaskOrderNo" parameterType="String" resultType="String">
+		select concat('RD',(replace(IFNULL(max(task_order_no),concat(date_format(now(),'%y%m%d'),replace(#{_parameter},'C',''),'00000')),'RD','')+1)) from task_order where DATE(add_date)=date_format(now(),'%Y-%m-%d') and client_no=#{_parameter}
+	</select>
+</mapper> 
+

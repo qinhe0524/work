@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Contact">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select * from contact where 1=1
+		<if test="params.Id!=null and params.Id!=''">
+			and Id = '${params.Id}'
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.Contact" parameterType="int">
+		select * from contact where Id=#{id}
+	</select>
+	<select id="getOneByObject" resultType="com.xk.entity.Contact" parameterType="map">
+		select * from contact where contact_object_type=#{contact_object_type} and contact_type=#{contact_type} and con_object_no=#{con_object_no}
+	</select>
+	<insert id="insert">
+		insert into contact(contact_object_type,con_sex,con_card_no,contact_no,con_mobile,con_phone,con_work_address,con_wechat,con_provice,con_object_no,contact_rim,contact_name,con_birthday,contact_type,con_email)
+		 values(#{contact_object_type},#{con_sex},#{con_card_no},#{contact_no},#{con_mobile},#{con_phone},#{con_work_address},#{con_wechat},#{con_provice},#{con_object_no},#{contact_rim},#{contact_name},#{con_birthday},#{contact_type},#{con_email})
+	</insert>
+	<update id="update" >
+		update contact set con_sex=#{con_sex},con_order_num=#{con_order_num},con_card_no=#{con_card_no},con_status=#{con_status},con_mobile=#{con_mobile},con_phone=#{con_phone},con_work_address=#{con_work_address},con_wechat=#{con_wechat},con_provice=#{con_provice},con_object_no=#{con_object_no},contact_rim=#{contact_rim},contact_name=#{contact_name},con_birthday=#{con_birthday},contact_type=#{contact_type},con_email=#{con_email} where contact_no=#{contact_no}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from contact where Id=#{id}
+	</delete>
+	<delete id="deleteAgent" parameterType="String">
+		delete from contact where contact_object_type=1 and con_object_no=#{_parameter}
+	</delete>
+		<delete id="deleteClient" parameterType="String">
+		delete from contact where contact_object_type=0 and con_object_no=#{_parameter}
+	</delete>
+</mapper> 
+

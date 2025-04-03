@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Clients">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select * from clients where 1=1
+		<if test="params.client_no!=null and params.client_no!=''">
+			and client_no = '${params.client_no}'
+		</if>
+		<if test="params.status!=null and params.status!=''">
+			and status = ${params.status}
+		</if>
+		<if test="params.client_name!=null and params.client_name!=''">
+			and client_name like '%${params.client_name}%'
+		</if>
+		<if test="params.client_label!=null and params.client_label!=''">
+			and client_label = ${params.client_label}
+		</if>
+		<if test="params.trade_type!=null and params.trade_type!=''">
+			and trade_type = ${params.trade_type}
+		</if>
+		
+	</select>
+	<select id="getOne" resultType="com.xk.entity.Clients" parameterType="String">
+		select * from clients where client_no=#{_parameter} 
+	</select>
+	<select id="getRealClients" resultType="com.xk.entity.Clients" >
+		select * from clients where status=2
+	</select>
+	<insert id="insert">
+	      <selectKey resultType="String" keyProperty="client_no" order="AFTER">
+             SELECT client_no from clients order by client_no desc limit 1
+         </selectKey>
+		insert into clients(client_short_name,adduser,client_no,client_label,trade_type,city,addtime,cps_num,area,clerk,province,agent_no,client_name)
+		 values(#{client_short_name},#{adduser},#{client_no},#{client_label},#{trade_type},#{city},#{addtime},#{cps_num},#{area},#{clerk},#{province},#{agent_no},#{client_name})
+	</insert>
+	<update id="update"  parameterType="int">
+		update clients set client_short_name=#{client_short_name},client_label=#{client_label},trade_type=#{trade_type},city=#{city},cps_num=#{cps_num},area=#{area},clerk=#{clerk},province=#{province},agent_no=#{agent_no},client_name=#{client_name} where client_no=#{client_no}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from clients where client_no=#{client_no}
+	</delete>
+   	<update id="updateStatus"  parameterType="Map">
+		update clients set status=#{status} where client_no='${client_no}'
+	</update>
+</mapper> 
+

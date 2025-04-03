@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] %d{yyyy-MM-dd HH:mm:ss} %l: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="rootLogger" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="logs/normal/root.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] %d{yyyy-MM-dd HH:mm:ss} %l: %m%n" />
+		</layout>
+	</appender>
+
+	<!--输出到文件的appender,公共的,按日期生成新文件-->
+	<!--<appender name="DEFAULT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="G:/svn_new/cash_log/logs/controller-default.log"/>
+		<param name="Append" value="true"/>&lt;!&ndash;是否项目重启 继续保存之前日志 &ndash;&gt;
+		<param name="threshold" value="all"/>&lt;!&ndash;纪录所有类型日志, &ndash;&gt;
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+		<param name="encoding" value="utf-8"/>&lt;!&ndash;编码 &ndash;&gt;
+		<layout class="org.apache.log4j.PatternLayout">&lt;!&ndash; layout表示输出方式,可以多种,class值区分,PatternLayout表示自定义格式&ndash;&gt;
+			<param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/>&lt;!&ndash;输出格式 &ndash;&gt;
+		</layout>
+	</appender>-->
+
+	<!--输出到文件的appender, info日志-->
+	<appender name="INFO-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="C:/Wechat_log/pay_log/info_logs/info.log"/>
+		<param name="Append" value="true"/><!--是否项目重启 继续保存之前日志 -->
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+		<param name="encoding" value="utf-8"/><!--编码 -->
+		<layout class="org.apache.log4j.PatternLayout"><!-- layout表示输出方式,可以多种,class值区分,PatternLayout表示自定义格式-->
+			<param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/><!--输出格式 -->
+		</layout>
+		<!--只记录info信息,就做如下设置-->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="info"/>
+			<param name="LevelMin" value="info"/>
+		</filter>
+	</appender>
+
+	<!--输出到文件的appender,error日志-->
+	<appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="C:/Wechat_log/pay_log/error_logs/error.log"/>
+		<param name="Append" value="true"/><!--是否项目重启 继续保存之前日志 -->
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+		<param name="encoding" value="utf-8"/><!--编码 -->
+		<layout class="org.apache.log4j.PatternLayout"><!-- layout表示输出方式,可以多种,class值区分,PatternLayout表示自定义格式-->
+			<param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/><!--输出格式 -->
+		</layout>
+		<!--只记录error信息,就做如下设置-->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="error"/>
+			<param name="LevelMin" value="error"/>
+		</filter>
+	</appender>
+
+	<!--输出到文件的appender,warn日志-->
+	<appender name="WARN-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="C:/Wechat_log/pay_log/warn_logs/warn.log"/>
+		<param name="Append" value="true"/><!--是否项目重启 继续保存之前日志 -->
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+		<param name="encoding" value="utf-8"/><!--编码 -->
+		<layout class="org.apache.log4j.PatternLayout"><!-- layout表示输出方式,可以多种,class值区分,PatternLayout表示自定义格式-->
+			<param name="ConversionPattern" value="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/><!--输出格式 -->
+		</layout>
+		<!--只记录warn信息,就做如下设置-->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="warn"/>
+			<param name="LevelMin" value="warn"/>
+		</filter>
+	</appender>
+
+
+	<!--info log-->
+	<logger name="whu.lmars.indoorparking" additivity="false"><!--为false的时候 限制了叠加性  即此时子logger不会继承root的appender -->
+		<level value="info"/><!-- ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF -->
+		<appender-ref ref="INFO-APPENDER"/>
+		<appender-ref ref="ERROR-APPENDER"/>
+		<appender-ref ref="WARN-APPENDER"/>
+		<appender-ref ref="console"/>
+	</logger>
+
+	<logger name="sam" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.mchange" additivity="false">
+		<level value="error" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="org.springframework" additivity="false">
+		<level value="error" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.opensymphony.xwork2" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="org.apache.struts2" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.ibatis.common.logging" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.ibatis" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="java.sql.Connection" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="java.sql.Statement" additivity="true">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.apache.http" additivity="false">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.apache.jcs" additivity="false">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.apache.axis" additivity="false">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.apache.commons" additivity="false">
+		<level value="info" />
+	</logger>
+
+	<root>
+		<level value="INFO,DEBUG,WARN,ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+<!--		<appender-ref ref="DEFAULT-APPENDER"/>-->
+<!--		<level value="info"/>&lt;!&ndash; ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF &ndash;&gt;-->
+		<!--正确日志-->
+		<appender-ref ref="INFO-APPENDER"/>
+		<!--错误日志-->
+		<appender-ref ref="ERROR-APPENDER"/>
+		<!--警告日志-->
+		<appender-ref ref="WARN-APPENDER"/>
+	</root>
+
+</log4j:configuration>

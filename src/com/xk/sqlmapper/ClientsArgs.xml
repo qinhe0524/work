@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ClientsArgs">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select ca.*,c.client_name from clients_args ca left join clients c on ca.client_no=c.client_no where 1=1
+		<if test="params.client_name!=null and params.client_name!=''">
+			and c.client_name like '%${params.client_name}%'
+		</if>
+		<if test="params.client_no!=null and params.client_no!=''">
+			and ca.client_no=#{params.client_no}
+		</if>
+		<if test="params.pay_model!=null and params.pay_model!=''">
+			and ca.pay_model=#{params.pay_model}
+		</if>
+		<if test="params.pay_channel!=null and params.pay_channel!=''">
+			and ca.pay_channel=#{params.pay_channel}
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.ClientsArgs" parameterType="String">
+		select * from clients_args where client_no=#{_parameter} 
+	</select>
+	<insert id="insert">
+		insert into clients_args(passwords,login_mobile,client_no,pay_model,max_money,cps_num,min_money,work_email,pay_channel,pay_charge,white_ips,rsa_key)
+		 values(#{passwords},#{login_mobile},#{client_no},#{pay_model},#{max_money},#{cps_num},#{min_money},#{work_email},#{pay_channel},#{pay_charge},#{white_ips},#{rsa_key})
+	</insert>
+	<update id="update"  parameterType="int">
+		update clients_args set passwords=#{passwords},login_mobile=#{login_mobile},client_no=#{client_no},pay_model=#{pay_model},max_money=#{max_money},cps_num=#{cps_num},min_money=#{min_money},work_email=#{work_email},pay_channel=#{pay_channel},pay_charge=#{pay_charge},white_ips=#{white_ips},rsa_key=#{rsa_key} where Id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from clients_args where Id=#{id}
+	</delete>
+	<select id="getLogin" resultType="Map" parameterType="String">
+		select ca.*,c.client_name,c.status as user_status from clients_args ca left join clients c on ca.client_no=c.client_no where ca.login_mobile=#{_parameter} 
+	</select>
+	
+</mapper> 
+

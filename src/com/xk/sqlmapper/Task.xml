@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Task">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select t.*,c.client_name from task t left join clients c on t.client_no=c.client_no where 1=1
+		<if test="params.task_no!=null and params.task_no!=''">
+			and t.task_no = '${params.task_no}'
+		</if>
+		<if test="params.client_no!=null and params.client_no!=''">
+			and t.client_no = '${params.client_no}'
+		</if>
+		<if test="params.task_name!=null and params.task_name!=''">
+			and t.task_name like '%${params.task_name}%'
+		</if>
+		<if test="params.client_name!=null and params.client_name!=''">
+			and c.client_name like '%${params.client_name}%'
+		</if>
+		<if test="params.task_status!=null and params.task_status!=''">
+			and t.task_status =#{params.task_status}
+		</if>
+		<if test="params.task_type!=null and params.task_type!=''">
+			and t.task_type =#{params.task_type}
+		</if>
+			<if test="params.task_province!=null and params.task_province!=''">
+			and t.task_province=#{params.task_province}
+		</if>
+		<if test="params.is_show!=null and params.is_show!=''">
+			and t.is_show =#{params.is_show}
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.Task" parameterType="String">
+		select * from task where task_no=#{_parameter}
+	</select>
+	<insert id="insert">
+		insert into task(task_rim,task_province,task_name,task_city,task_type,client_no,task_no,budget_amt,end_date,task_condition,add_time,start_date)
+		 values(#{task_rim},#{task_province},#{task_name},#{task_city},#{task_type},#{client_no},#{task_no},#{budget_amt},#{end_date},#{task_condition},now(),#{start_date})
+	</insert>
+	<update id="update"  parameterType="com.xk.entity.Task">
+		update task set task_rim=#{task_rim},task_province=#{task_province},task_name=#{task_name},task_city=#{task_city},task_type=#{task_type},client_no=#{client_no},budget_amt=#{budget_amt},end_date=#{end_date},task_condition=#{task_condition},start_date=#{start_date} where task_no=#{task_no}
+	</update>
+	<update id="passok" parameterType="String">
+	    update task set task_status=2 where task_no=#{_parameter}
+	</update>
+	<update id="topass" parameterType="String">
+	    update task set task_status=1 where task_no=#{_parameter}
+	</update>
+	<update id="tocancel" parameterType="String">
+	    update task set task_status=-1 where task_no=#{_parameter}
+	</update>
+	<update id="returnpass" parameterType="String">
+	    update task set task_status=0 where task_no=#{_parameter}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from task where task_no=#{task_no}
+	</delete>
+	<select id="getTaskNo" parameterType="String" resultType="String">
+		select concat('R',(replace(IFNULL(max(task_no),concat(date_format(now(),'%y%m%d'),replace(#{_parameter},'C',''),'000')),'R','')+1)) from task where DATE(add_time)=date_format(now(),'%Y-%m-%d') and client_no=#{_parameter}
+	</select>
+	<select id="getOktask" resultType="map" parameterType="String">
+	  select * from task where client_no=#{_parameter} and task_status=2
+	</select>
+	<select id="getShowtask" resultType="map" parameterType="String">
+	  select t.*,c.client_name from task t left join clients c on t.client_no=c.client_no where t.task_status=2 and t.is_show!=0
+	</select>
+	<select id="getShowTypetask" resultType="map" parameterType="String">
+	  select t.*,c.client_name from task t left join clients c on t.client_no=c.client_no where t.task_status=2 and t.is_show!=0 and t.task_type=#{_parameter}
+	</select>
+	<select id="getHottask" resultType="map" parameterType="String">
+	  select t.*,c.client_name from task t left join clients c on t.client_no=c.client_no where t.task_status=2 and t.is_show=2
+	</select>
+	<select id="getAllTaskInfo" resultType="map" parameterType="String">
+		select t.*,c.cps_num from task t left join clients c on t.client_no=c.client_no where task_no=#{_parameter}
+	</select>
+</mapper> 
+

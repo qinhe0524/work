@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+ 
+ <configuration> 
+ <typeAliases> 	
+ 	<typeAlias alias="map" type="java.util.Map"/>
+ 	<typeAlias alias="String" type="java.lang.String"/>
+ 	<typeAlias alias="int" type="java.lang.Integer"/>
+ 	<typeAlias alias="Page" type="com.xk.entity.Page"/>
+ 	<typeAlias alias="UserInfo" type="com.xk.entity.UserInfo"/>
+ </typeAliases>
+
+ 
+ <!-- 拦截器 -->
+<plugins>  
+	<plugin interceptor="com.xk.util.PageInterceptor">  
+		<property name="databaseType" value="mysql"/>  
+		<property name="printSql" value="1"/> <!-- 自定义 是否打印sql语句 -->
+		<property name="writeSqlLog" value="1"/><!--自定义 是否存储sql语句日志 -->
+		
+	</plugin>  
+</plugins> 
+ 
+<!-- 列出映射文件 -->
+	<mappers>
+		<mapper resource="com/xk/sqlmapper/Carte.xml" />
+		<mapper resource="com/xk/sqlmapper/BaseInfo.xml" />
+		<mapper resource="com/xk/sqlmapper/BaseInfoClass.xml" />
+		<mapper resource="com/xk/sqlmapper/UserInfo.xml" />
+		<mapper resource="com/xk/sqlmapper/Permission.xml" />
+		<mapper resource="com/xk/sqlmapper/LoginLog.xml" />
+		<mapper resource="com/xk/sqlmapper/UserAction.xml" />
+	  	<mapper resource="com/xk/sqlmapper/Userallot.xml"/>
+	  	<mapper resource="com/xk/sqlmapper/PermissionMapping.xml"/>
+	  <mapper resource="com/xk/sqlmapper/Agent.xml"/>
+	   <mapper resource="com/xk/sqlmapper/Cache.xml"/>
+	  <mapper resource="com/xk/sqlmapper/FreeWorker.xml"/>
+	  <mapper resource="com/xk/sqlmapper/FreeWorker.xml"/>
+	  <mapper resource="com/xk/sqlmapper/Contact.xml"/>
+	  <mapper resource="com/xk/sqlmapper/Company.xml"/>	
+	  <mapper resource="com/xk/sqlmapper/Clients.xml"/>
+	  <mapper resource="com/xk/sqlmapper/ClientsArgs.xml"/>
+	  <mapper resource="com/xk/sqlmapper/ClientsAccount.xml"/>
+	  <mapper resource="com/xk/sqlmapper/ClientsRecharge.xml"/>
+	  <mapper resource="com/xk/sqlmapper/Task.xml"/>
+	  <mapper resource="com/xk/sqlmapper/TaskOrderBatch.xml"/>
+	  <mapper resource="com/xk/sqlmapper/TaskOrder.xml"/>
+	  <mapper resource="com/xk/sqlmapper/CheckPerson.xml"/>
+	  <mapper resource="com/xk/sqlmapper/AgentAgent.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

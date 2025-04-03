@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="partwechat" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="207a8d27-e1e1-44c3-8c13-e0d60dfd1444" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "qinhe0524"
+  }
+}]]></component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/qinhe0524/work.git",
+    "accountId": "1d2c5c6b-c97b-45db-8242-abc0dd9a335f"
+  }
+}]]></component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="1qs6i1hYyY0HzihGAx5zuxuwNdD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AliFourUtils.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Tomcat Server.partwechat.executor": "Run",
+    "Tomcat 服务器.partwechat.executor": "Debug",
+    "git-widget-placeholder": "Merging main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/code/work",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\code\partwechat\WebRoot\views\Task" />
+      <recent name="D:\WorkSpeak\hlh\partwechat\WebRoot\views\FreeWorker" />
+      <recent name="D:\WorkSpeak\hlh\partwechat\WebRoot\public\imgs" />
+      <recent name="D:\WorkSpeak\jclx\partwechat\WebRoot\public\js" />
+      <recent name="D:\WorkSpeak\jclx\partwechat\WebRoot\WEB-INF\lib" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="partwechat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.10" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8023/partwechat/FreeWorker/login" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="partwechat">
+          <settings>
+            <option name="CONTEXT_PATH" value="/partwechat" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="2f16ec02-9a3f-4f0c-b532-5f03c85aa916" />
+        <option name="HTTP_PORT" value="8023" />
+        <option name="JNDI_PORT" value="1013" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="62352" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="partwechat" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\13173\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="207a8d27-e1e1-44c3-8c13-e0d60dfd1444" name="Default Changelist" comment="" />
+      <created>1617856073645</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617856073645</updated>
+      <workItem from="1617856079679" duration="59000" />
+      <workItem from="1623714138604" duration="2596000" />
+      <workItem from="1625386175340" duration="2799000" />
+      <workItem from="1625389699809" duration="1944000" />
+      <workItem from="1625391682763" duration="7972000" />
+      <workItem from="1625402995739" duration="1173000" />
+      <workItem from="1625409333194" duration="11476000" />
+      <workItem from="1635817093736" duration="2017000" />
+      <workItem from="1635820657032" duration="6849000" />
+      <workItem from="1635834899206" duration="7564000" />
+      <workItem from="1635901926812" duration="891000" />
+      <workItem from="1639042190352" duration="16000" />
+      <workItem from="1639042694388" duration="51000" />
+      <workItem from="1639051359640" duration="17000" />
+      <workItem from="1639052041713" duration="970000" />
+      <workItem from="1639619313388" duration="151000" />
+      <workItem from="1639620106141" duration="243000" />
+      <workItem from="1640427910741" duration="26000" />
+      <workItem from="1640493549114" duration="2898000" />
+      <workItem from="1640587303288" duration="3682000" />
+      <workItem from="1640656209622" duration="2381000" />
+      <workItem from="1640670126753" duration="1209000" />
+      <workItem from="1640675215235" duration="864000" />
+      <workItem from="1640677917256" duration="15192000" />
+      <workItem from="1640743761078" duration="6684000" />
+      <workItem from="1640764578835" duration="6079000" />
+      <workItem from="1640772539888" duration="3582000" />
+      <workItem from="1640828313417" duration="1308000" />
+      <workItem from="1640855607944" duration="1380000" />
+      <workItem from="1641372334523" duration="1222000" />
+      <workItem from="1642044154107" duration="165000" />
+      <workItem from="1642643696515" duration="99000" />
+      <workItem from="1643179323771" duration="3072000" />
+      <workItem from="1645004286231" duration="98000" />
+      <workItem from="1646987515525" duration="1180000" />
+      <workItem from="1647333758853" duration="3421000" />
+      <workItem from="1648175966167" duration="1094000" />
+      <workItem from="1648446328267" duration="1540000" />
+      <workItem from="1648516826779" duration="535000" />
+      <workItem from="1658372740598" duration="334000" />
+      <workItem from="1658461970321" duration="90000" />
+      <workItem from="1658717101301" duration="7508000" />
+      <workItem from="1658730589708" duration="3468000" />
+      <workItem from="1658745149259" duration="1799000" />
+      <workItem from="1658798675387" duration="1184000" />
+      <workItem from="1660269041162" duration="688000" />
+      <workItem from="1661225826183" duration="4066000" />
+      <workItem from="1668238356223" duration="92000" />
+      <workItem from="1676269422946" duration="675000" />
+      <workItem from="1689041056949" duration="1912000" />
+      <workItem from="1689043497532" duration="9692000" />
+      <workItem from="1689143678442" duration="8996000" />
+      <workItem from="1689582584328" duration="156000" />
+      <workItem from="1691396333260" duration="77000" />
+      <workItem from="1691396630739" duration="1175000" />
+      <workItem from="1721787402625" duration="783000" />
+      <workItem from="1723009379012" duration="22000" />
+      <workItem from="1724393959700" duration="2332000" />
+      <workItem from="1724396338082" duration="1296000" />
+      <workItem from="1725846553449" duration="917000" />
+      <workItem from="1725849379032" duration="1531000" />
+      <workItem from="1743040682820" duration="4138000" />
+      <workItem from="1743145700303" duration="4510000" />
+      <workItem from="1743391306694" duration="7652000" />
+      <workItem from="1743478246862" duration="1495000" />
+      <workItem from="1743487175109" duration="13109000" />
+      <workItem from="1743556095605" duration="2759000" />
+      <workItem from="1743573323490" duration="107000" />
+      <workItem from="1743577830849" duration="1874000" />
+    </task>
+    <task id="LOCAL-00001">
+      <created>1635902103576</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635902103577</updated>
+    </task>
+    <task id="LOCAL-00002">
+      <created>1639620344445</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1639620344445</updated>
+    </task>
+    <task id="LOCAL-00003">
+      <created>1658462029602</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1658462029602</updated>
+    </task>
+    <task id="LOCAL-00004">
+      <created>1658719850103</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1658719850103</updated>
+    </task>
+    <task id="LOCAL-00005">
+      <created>1658745378075</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1658745378075</updated>
+    </task>
+    <task id="LOCAL-00006">
+      <created>1658750981473</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658750981473</updated>
+    </task>
+    <task id="LOCAL-00007">
+      <created>1660269060929</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1660269060929</updated>
+    </task>
+    <task id="LOCAL-00008">
+      <created>1661261416093</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1661261416093</updated>
+    </task>
+    <task id="LOCAL-00009">
+      <created>1661262150412</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1661262150412</updated>
+    </task>
+    <task id="LOCAL-00010" summary="&quot;加入勾选协议&quot;">
+      <created>1689065379274</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1689065379274</updated>
+    </task>
+    <task id="LOCAL-00011" summary="&quot;查看协议&quot;">
+      <created>1689153313001</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1689153313001</updated>
+    </task>
+    <task id="LOCAL-00012" summary="&quot;跟心ocr&quot;">
+      <created>1721787558201</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1721787558201</updated>
+    </task>
+    <task id="LOCAL-00013" summary="&quot;任务调整，显示结算方式&quot;">
+      <created>1724396294201</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1724396294201</updated>
+    </task>
+    <task id="LOCAL-00014" summary="&quot;认证换成三要素，更换联系方式&quot;">
+      <created>1725850901585</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1725850901585</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;加入勾选协议&quot;" />
+    <MESSAGE value="&quot;查看协议&quot;" />
+    <MESSAGE value="&quot;跟心ocr&quot;" />
+    <MESSAGE value="&quot;任务调整，显示结算方式&quot;" />
+    <MESSAGE value="&quot;认证换成三要素，更换联系方式&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;认证换成三要素，更换联系方式&quot;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xk/util/HuaweiFourUtils.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xk/controller/FreeWorkerController.java</url>
+          <line>648</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xk/controller/FreeWorkerController.java</url>
+          <line>695</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/xk/controller/TaskController.java</url>
+          <line>101</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

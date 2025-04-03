@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Company">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select * from company where 1=1
+		<if test="params.Id!=null and params.Id!=''">
+			and Id = '${params.Id}'
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.Company" parameterType="int">
+		select * from company where Id=#{id}
+	</select>
+	<select id="getOneByObject" resultType="com.xk.entity.Company" parameterType="String">
+		select * from company where com_object_no=#{_parameter} limit 1
+	</select>
+	<insert id="insert">
+		insert into company(com_work_address,com_object_type,com_true_person_cardno_date,com_true_person,com_legal_person_cardno,com_legal_person_cardno_date,com_scope,com_remark,company_name,com_true_person_cardno,com_legal_person,com_object_no,com_blis_no)
+		 values(#{com_work_address},#{com_object_type},#{com_true_person_cardno_date},#{com_true_person},#{com_legal_person_cardno},#{com_legal_person_cardno_date},#{com_scope},#{com_remark},#{company_name},#{com_true_person_cardno},#{com_legal_person},#{com_object_no},#{com_blis_no})
+	</insert>
+	<update id="update">
+		update company set com_work_address=#{com_work_address},com_true_person_cardno_date=#{com_true_person_cardno_date},com_true_person=#{com_true_person},com_legal_person_cardno=#{com_legal_person_cardno},com_legal_person_cardno_date=#{com_legal_person_cardno_date},com_scope=#{com_scope},com_remark=#{com_remark},company_name=#{company_name},com_true_person_cardno=#{com_true_person_cardno},com_legal_person=#{com_legal_person},com_blis_no=#{com_blis_no} where com_object_type=#{com_object_type} and com_object_no=#{com_object_no}
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from company where com_object_no=#{_parameter}
+	</delete>
+	
+</mapper> 
+

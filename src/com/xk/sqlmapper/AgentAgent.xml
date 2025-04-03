@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AgentAgent">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select * from agent_agent where 1=1
+		<if test="params.Id!=null and params.Id!=''">
+			and Id = '${params.Id}'
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.AgentAgent" parameterType="int">
+		select * from agent_agent where Id=#{id}
+	</select>
+	<select id="getAgentAgentList" resultType="com.xk.entity.AgentAgent" parameterType="String">
+		select * from agent_agent where agent_no=#{_parameter}
+	</select>
+	<insert id="insert">
+		insert into agent_agent(parent_no,is_direct,agent_level,agent_no)
+		 values(#{parent_no},#{is_direct},#{agent_level},#{agent_no})
+	</insert>
+	<update id="update"  parameterType="int">
+		update agent_agent set parent_no=#{parent_no},is_direct=#{is_direct},agent_level=#{agent_level},agent_no=#{agent_no} where Id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from agent_agent where Id=#{id}
+	</delete>
+</mapper> 
+

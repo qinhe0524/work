@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ClientsAccount">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select ca.*,c.client_name from clients_account ca left join clients c on ca.client_no=c.client_no
+		<if test="params.client_name!=null and params.client_name!=''">
+			and c.client_name like '%${params.client_name}%'
+		</if>
+		<if test="params.client_no!=null and params.client_no!=''">
+			and ca.client_no=#{params.client_no}
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.ClientsAccount" parameterType="String">
+		select * from clients_account where client_no=#{_parameter}
+	</select>
+	<insert id="insert">
+		insert into clients_account(add_date,client_no,last_action_date)
+		 values(#{add_date},#{client_no},#{last_action_date})
+	</insert>
+	<update id="update"  parameterType="int">
+		update clients_account set usable_money=#{usable_money},all_money=#{all_money},freeze_money=#{freeze_money},add_date=#{add_date},client_no=#{client_no},acc_status=#{acc_status},last_action_date=#{last_action_date},check_var=#{check_var},total_money=#{total_money} where Id=#{id}
+	</update>
+	<update id="freezeAccount" parameterType="String">
+		update clients_account set acc_status=1 where client_no=#{_parameter} 
+	</update>
+	<update id="stopAccount" parameterType="String">
+		update clients_account set acc_status=0 where client_no=#{_parameter} 
+	</update>
+	<update id="startAccount" parameterType="String">
+		update clients_account set acc_status=2 where client_no=#{_parameter} 
+	</update>
+	
+	
+</mapper> 
+

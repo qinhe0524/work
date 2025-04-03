@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ClientsRecharge">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select cr.*,c.client_name from clients_recharge cr left join clients c on cr.client_no=c.client_no where 1=1
+		<if test="params.client_name!=null and params.client_name!=''">
+			and c.client_name like '%${params.client_name}%'
+		</if>
+		<if test="params.client_no!=null and params.client_no!=''">
+			and cr.client_no=#{params.client_no}
+		</if>
+		<if test="params.pay_channel!=null and params.pay_channel!=''">
+			and cr.pay_channel=#{params.pay_channel}
+		</if>
+		<if test="params.add_date!=null and params.add_date!=''">
+			and cr.add_date=#{params.add_date}
+		</if>
+		<if test="params.recharge_no!=null and params.recharge_no!=''">
+			and cr.recharge_no=#{params.recharge_no}
+		</if>
+		<if test="params.fd!=null and params.fd!=''">  <!-- //当为财务菜单时，只看状态待审、已审核、作废三种状态的 -->
+			and cr.recharge_status!=0
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.ClientsRecharge" parameterType="String">
+		select * from clients_recharge where recharge_no=#{_parameter} 
+	</select>
+	<insert id="insert">
+		insert into clients_recharge(recharge_rim,add_date,recharge_no,adduser,remit_name,client_no,amount,add_time,pay_channel,remit_account,channel_recharge_no)
+		 values(#{recharge_rim},#{add_date},#{recharge_no},#{adduser},#{remit_name},#{client_no},#{amount},#{add_time},#{pay_channel},#{remit_account},#{channel_recharge_no})
+	</insert>
+	<update id="update"  parameterType="int">
+		update clients_recharge set recharge_no=#{recharge_no},adduser=#{adduser},remit_name=#{remit_name},client_no=#{client_no},recharge_status=#{recharge_status},amount=#{amount},add_time=#{add_time},pay_channel=#{pay_channel},remit_account=#{remit_account},channel_recharge_no=#{channel_recharge_no} where Id=#{id}
+	</update>
+	<update id="topass" parameterType="String">
+	    update clients_recharge set recharge_status=1 where recharge_no=#{_parameter} 
+	</update>
+	<update id="returnpass" parameterType="String">
+	    update clients_recharge set recharge_status=0 where recharge_no=#{_parameter} 
+	</update>
+	<update id="passok" parameterType="Map">
+	    update clients_recharge set recharge_status=2,passuser=#{passuser},passtime=#{passtime} where recharge_no=#{recharge_no} 
+	</update>
+	<update id="tocancel" parameterType="String">
+	    update clients_recharge set recharge_status=-1 where recharge_no=#{_parameter} 
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from clients_recharge where recharge_no=#{_parameter} and recharge_status=0
+	</delete>
+	<select id="getRechargeNo" parameterType="String" resultType="String">
+		select concat('H',(replace(IFNULL(max(recharge_no),concat(date_format(now(),'%y%m%d'),replace(#{_parameter},'C',''),'00')),'H','')+1)) from clients_recharge where add_date=date_format(now(),'%Y-%m-%d') and client_no=#{_parameter}
+	</select>
+</mapper> 
+

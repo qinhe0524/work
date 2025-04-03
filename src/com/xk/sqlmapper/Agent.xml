@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Agent">
+	<select id="parentList" resultType="map">
+		select agent_name,agent_no,clerk from agent where 1=1 and status=1
+	</select>
+	<select id="getOne" resultType="com.xk.entity.Agent" parameterType="String">
+		select * from agent where agent_no=#{_parameter} limit 1
+	</select>
+	<select id="getOneByWorkerNo" resultType="com.xk.entity.Agent" parameterType="String">
+		select * from agent where worker_no=#{_parameter} limit 1
+	</select>
+	<insert id="insert" >
+	    <selectKey resultType="String" keyProperty="agent_no" order="AFTER">
+             SELECT agent_no from agent order by agent_no desc limit 1
+         </selectKey>
+	
+		insert into agent(agent_label,pagent_no,agent_level,adduser,short_name,trade_type,city,addtime,area,clerk,province,iscompany,agent_no,agent_name,cps_type,cps_num,worker_no)
+		 values(#{agent_label},#{pagent_no},#{agent_level},#{adduser},#{short_name},#{trade_type},#{city},#{addtime},#{area},#{clerk},#{province},#{iscompany},#{agent_no},#{agent_name},#{cps_type},#{cps_num},#{worker_no})
+	</insert>
+	<update id="update"  parameterType="String">
+		update agent set agent_label=#{agent_label},pagent_no=#{pagent_no},agent_level=#{agent_level},short_name=#{short_name},trade_type=#{trade_type},city=#{city},area=#{area},clerk=#{clerk},province=#{province},iscompany=#{iscompany},agent_name=#{agent_name},cps_type=#{cps_type},cps_num=#{cps_num} where agent_no='${agent_no}'
+	</update>
+	<select id="agentContactNum" resultType="int" parameterType="String">
+		select count(*) as nb from contact where contact_type=0 and contact_object_type=1 and con_mobile = #{_parameter}
+	</select>
+	<update id="updateStatus"  parameterType="Map">
+		update agent set status=#{status} where agent_no='${agent_no}'
+	</update>
+	<delete id="delete" parameterType="String">
+		delete from agent where agent_no=#{_parameter}
+	</delete>
+	<select id="getAgentClientNum" resultType="map" parameterType="String">
+		select (select count(distinct(agent_no)) from agent_agent a where parent_no = #{_parameter} and is_direct=1) as agent_num,(select count(distinct(client_no)) from agent_agent aa left join clients c on aa.agent_no=c.agent_no where aa.parent_no = #{_parameter} and c.client_no is not null) as client_num
+	</select>
+	<select id="getAgentsByParentNo" resultType="map" parameterType="String">
+select a.*,agent_cnum.client_nums,fw.wechat_head_img,fw.wechat_nickname from agent a left join free_worker fw on a.worker_no=fw.worker_no left join
+(select count(*) as client_nums,agent_no from(
+select DISTINCT c.client_name,(case when aa.parent_no=#{_parameter} then aa.agent_no else aa.parent_no end) as agent_no from clients c left join agent_agent aa on c.agent_no=aa.agent_no where aa.parent_no in(select agent_no from agent_agent a where parent_no=#{_parameter} and is_direct=1) or (aa.parent_no=#{_parameter} and is_direct=1)
+) ctagent group by agent_no) agent_cnum on a.agent_no=agent_cnum.agent_no
+  where a.pagent_no = #{_parameter};	</select>
+	<select id="getYesterdayAmt" resultType="int" parameterType="String">
+	select sum(order_amt) as nums from task_order where client_no in(select distinct(client_no) from agent_agent aa left join clients c on aa.agent_no=c.agent_no where aa.parent_no = #{_parameter} and c.client_no is not null) and task_order_status=4 and add_date=DATE_SUB(curdate(),INTERVAL 1 DAY)
+	</select>
+	<select id="getOrderByDay" resultType="map" parameterType="String">
+	select sum(order_amt) as order_amt,add_date,count(*) as nums from task_order where client_no in(select distinct(client_no) from agent_agent aa left join clients c on aa.agent_no=c.agent_no where parent_no = #{_parameter} and c.client_no is not null) and task_order_status=4  group by add_date order by add_date desc 
+	</select>
+	<select id="getOrderByClient" resultType="map" parameterType="String">
+	select c.client_short_name,t.* from(select sum(order_amt) as order_amt,add_date,count(*) as nums,client_no from task_order where client_no in(select distinct(client_no) from agent_agent aa left join clients c on aa.agent_no=c.agent_no where parent_no = #{_parameter} and c.client_no is not null) and task_order_status=4 group by add_date,client_no order by add_date desc) as t 
+left join clients c on t.client_no=c.client_no 
+	</select>
+	<select id="getOrderByAgent" resultType="map" parameterType="String">
+	select sum(order_amt) as order_amt,ag.agent_no,max(ag.short_name) as short_name,count(*) as nums,add_date from(select DISTINCT t.*,(case when aa.parent_no=#{_parameter} then aa.agent_no else aa.parent_no end) as agent_no from (select * from task_order where client_no in(select distinct(client_no) from agent_agent aa left join clients c on aa.agent_no=c.agent_no and aa.agent_no!=aa.parent_no where parent_no = #{_parameter} and c.client_no is not null) and task_order_status=4) t
+left join clients c on t.client_no=c.client_no left join (
+select * from agent_agent where parent_no in(select agent_no from agent_agent a where parent_no=#{_parameter} and is_direct=1) or (parent_no=#{_parameter} and is_direct=1)
+) aa on c.agent_no=aa.agent_no) as tr_order left join agent ag on tr_order.agent_no=ag.agent_no group by add_date,ag.agent_no order by add_date desc
+	</select>
+	<select id="getClients" resultType="map" parameterType="String">
+		select c.* from clients c
+where c.client_no in(select distinct(client_no) from agent_agent aa left join clients c on aa.agent_no=c.agent_no where parent_no = #{_parameter} and c.client_no is not null)
+	</select>
+</mapper> 
+

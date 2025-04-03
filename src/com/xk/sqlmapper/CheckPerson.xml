@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CheckPerson">
+	<select id="getPageList" resultType="map" parameterType="Page">
+		select * from check_person where 1=1
+		<if test="params.Id!=null and params.Id!=''">
+			and Id = '${params.Id}'
+		</if>
+	</select>
+	<select id="getOne" resultType="com.xk.entity.CheckPerson" parameterType="Map">
+		select * from check_person where ck_cardno=#{ck_cardno} and ck_mobile=#{ck_mobile} and ck_name=#{ck_name} limit 1
+	</select>
+	<insert id="insert">
+		insert into check_person(ck_channel,ck_cardno,ck_mobile,ck_name,ck_rtcode,add_date,ck_bankcard,ck_result,add_time,ck_ip,ck_msg)
+		 values(#{ck_channel},#{ck_cardno},#{ck_mobile},#{ck_name},#{ck_rtcode},DATE(now()),#{ck_bankcard},#{ck_result},TIME(now()),#{ck_ip},#{ck_msg})
+	</insert>
+	<update id="update"  parameterType="int">
+		update check_person set ck_channel=#{ck_channel},ck_cardno=#{ck_cardno},ck_mobile=#{ck_mobile},ck_name=#{ck_name},ck_rtcode=#{ck_rtcode},add_date=#{add_date},ck_bankcard=#{ck_bankcard},ck_result=#{ck_result},add_time=#{add_time},ck_ip=#{ck_ip} where Id=#{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from check_person where Id=#{id}
+	</delete>
+</mapper> 
+
